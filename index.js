@@ -15,7 +15,7 @@ const vermelho = document.querySelector('.vermelho');
 const verde = document.querySelector('.verde');
 const amarelo = document.querySelector('.amarelo');
 
-//FUNÇÃO PARA SORTEIO DAS CORES
+//FUNÇÃO para ordem aleatoria
 let shuffleOrder = () => {
   let colorOrder = Math.floor(Math.random() * 4);
   order[order.length] = colorOrder;
@@ -26,7 +26,7 @@ let shuffleOrder = () => {
     lightColor(elementColor, Number(i) + 1);
   }
 }
-
+//acende a proxima cor
 let lightColor = (element, number) => {
   number = number * 500;
   setTimeout(() => {
@@ -36,3 +36,41 @@ let lightColor = (element, number) => {
     element.classList.remover('selected');
   });
 }
+//checa se os clicados são os mesmos gerados pelo jogo
+let checkOrder = () => {
+  for(let i in clickedOrder) {
+    if(clickedOrder[i] != order[i]) {
+      lose();
+      break;
+    }
+  }
+  if(clickedOrder.length == order.length){
+    alert(`pontuação: ${score}\nVocê acertou! Iniciando próximo nivel`);
+    nextLevel();
+  }
+}
+
+//função clique do usuário
+let click = (color) =>  {
+  clickedOrder[clickedOrder.length] =color;
+  createColorElement(color).classList.add('selected');
+
+  setTimeout(() => {
+    elementColor(color).classList.remover('selected');
+  })
+
+  checkOrder();
+}
+
+//função que retorna a cor
+let createColorElement = (color) => {
+  if(color == 0) {
+    return verde;
+  }else if(color == 1) {
+    return vermelho;
+  }else if(color == 2) {
+    return amarelo;
+  }else if(color == 3) {
+    return azul;
+  }
+} 
