@@ -56,10 +56,9 @@ let click = (color) =>  {
   createColorElement(color).classList.add('selected');
 
   setTimeout(() => {
-    elementColor(color).classList.remover('selected');
-  })
-
-  checkOrder();
+    createColorElement(color).classList.remover('selected');
+    checkOrder();
+  }, 250);
 }
 
 //função que retorna a cor
@@ -90,6 +89,19 @@ let gameOver = () => {
   playGame();
 }
 
+//função inicio do jogo
 let playGame = () => {
-  
+  alert('Bem vindo ao NewGenius, iniciando novo jogo!');
+  score = 0;
+
+  nextLevel();
 }
+
+//clique para computar dados
+
+verde.onclick = () => click(0);
+vermelho.onclick = () => click(1);
+amarelo.onclick = () => click(2);
+azul.onclick = () => click(3);
+
+playGame();
